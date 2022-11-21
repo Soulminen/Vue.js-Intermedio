@@ -1,6 +1,5 @@
-<script setup lang="ts">
-import { ref } from 'vue';
-const counter = ref<number>(0);
+<script lang="ts" src="@/App.ts">
+
 
 </script>
 
