@@ -8,7 +8,10 @@ import NavBar from "@/shared/components/NavBar.vue";
 <template>
   <div class="wrapper">
     <header>
-       <NavBar/>  
+      <NavBar 
+        title="BreakingBad"
+        links=""
+      />  
 
     </header>
 
