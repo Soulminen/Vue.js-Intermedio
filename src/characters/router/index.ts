@@ -14,8 +14,26 @@ import CharacterSearch from "../pages/CharacterSearch.vue";
     redirect: '/characters/list',
     component: CharacterLayout,
     children: [
-        { path: 'by/id', name: 'character-id', component: CharacterId  },
-        { path: 'list', name: 'character-list', component: CharacterList  },
-        { path: 'search', name: 'character-search', component: CharacterSearch  },
+        { 
+            path: 'by/id', 
+            name: 'character-id',
+            props: { title: 'Por Id'},
+            component: CharacterId,
+
+        },
+        { 
+            path: 'list', 
+            name: 'character-list', 
+            props: { title: 'Lista'}, 
+            component: CharacterList,
+
+        },
+        { 
+            path: 'search', 
+            name: 'character-search', 
+            props: { title: 'Búsqueda'}, 
+            component: CharacterSearch,
+
+        },
     ]   
 }
