@@ -1,9 +1,13 @@
 <script setup lang="ts">
 import breakingBadApi from '@/api/breakingBadApi';
+import type { Character } from '@/characters/interfaces/character';
 
-breakingBadApi.get('/characters')
+breakingBadApi.get<Character[]>('/characters')
     .then( resp => {
-        console.log({ data: resp.data[0].name });
+        // console.log({ data: resp.data[0].name });
+        const name = resp.data[0].name;
+        console.log({ name });
+        
     });
 
 </script>
