@@ -2,30 +2,23 @@
 import { ref } from "vue";
 import breakingBadApi from '@/api/breakingBadApi';
 import type { Character } from '@/characters/interfaces/character';
+import { useCharacters } from '@/characters/composables/useCharacters';
 
 // const { data: characters } = await breakingBadApi.get<Character[]>('/characters');
 
+const { isLoading, characters} = useCharacters();
 
-const characters = ref<Character[]>([]);
-
-breakingBadApi.get<Character[]>('/characters')
-    .then( resp => {
-        characters.value = resp.data;
-        // console.log({ data: resp.data[0].name });
-        // const name = resp.data[0].name;
-        // console.log({ name });
-    });
 
 </script>
 
 
 <template>
+    <h1 v-if="isLoading">Loading...</h1>
     <ul>
         <li 
             v-for="{ char_id, name } of characters"
             :key="char_id"
         >
-
             {{ name }}
         </li>
         

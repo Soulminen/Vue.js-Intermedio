@@ -30,9 +30,9 @@ const routeLinks: RouterLink[] = characterRoute.children!
         />
 
         <!-- RouterView + Suspense -->
-        <Suspense>
+        <!-- <Suspense>
+        </Suspense> -->
             <RouterView />
-        </Suspense>
 </template>
 
 
