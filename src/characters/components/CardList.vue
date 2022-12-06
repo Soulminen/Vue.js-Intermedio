@@ -6,7 +6,7 @@ import { useCharacters } from '@/characters/composables/useCharacters';
 
 // const { data: characters } = await breakingBadApi.get<Character[]>('/characters');
 
-const { isLoading, characters} = useCharacters();
+const { isLoading, characters, hasError, errorMessage } = useCharacters();
 
 
 </script>
@@ -14,6 +14,7 @@ const { isLoading, characters} = useCharacters();
 
 <template>
     <h1 v-if="isLoading">Loading...</h1>
+    <h1 v-if="hasError">{{ errorMessage }}</h1>
     <ul>
         <li 
             v-for="{ char_id, name } of characters"
