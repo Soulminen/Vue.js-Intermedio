@@ -20,7 +20,7 @@ const getCharactersSlow = async():Promise<Character[]> => {
     return new Promise( (resolve) => {
         setTimeout( async() => {
             const { data } = await breakingBadApi.get<Character[]>('/characters');
-            resolve(data);
+            resolve(data.filter( character => ![14, 17, 39].includes(character.char_id) ) );
         }, 1000);
     })
 
