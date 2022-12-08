@@ -10,7 +10,7 @@ import './assets/main.css';
 const app = createApp(App);
 
 
-app.use( VueQueryPlugin )
+app.use( VueQueryPlugin );
 
 app.use( router );
 
