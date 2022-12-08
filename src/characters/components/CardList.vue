@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
+import CharacterCard from "@/characters/components/CharacterCard.vue";
+
 import breakingBadApi from '@/api/breakingBadApi';
 import type { Character } from '@/characters/interfaces/character';
 import { useCharacters } from '@/characters/composables/useCharacters';
@@ -19,7 +21,7 @@ const getCharactersSlow = async():Promise<Character[]> => {
         setTimeout( async() => {
             const { data } = await breakingBadApi.get<Character[]>('/characters');
             resolve(data);
-        }, 3000);
+        }, 1000);
     })
 
 }
@@ -39,19 +41,24 @@ const { isLoading, isError, data: characters, error} = useQuery(
 
 <template>
     <h1 v-if="isLoading">Loading...</h1>
-    <h1 v-if="isError">{{ error }}</h1>
-    <ul>
-        <li 
-            v-for="{ char_id, name } of characters"
-            :key="char_id"
-        >
-            {{ name }}
-        </li>
+    
+    <div class="card-list">
+        <CharacterCard   
+            v-for="character of characters"
+            :key="character.char_id" 
+            :character="character"
+        />
         
-    </ul>
+    </div>
 </template>
 
 
 <style scoped>
+
+.card-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
 
 </style>
