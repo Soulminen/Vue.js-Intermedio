@@ -9,6 +9,9 @@ import './assets/main.css';
 
 const app = createApp(App);
 
+import "@/store/characters.store";
+
+
 
 // app.use( VueQueryPlugin );
 VueQueryPlugin.install( app, {
