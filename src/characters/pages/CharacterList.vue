@@ -9,15 +9,20 @@ import characterStore from '@/store/characters.store';
 
 const props = defineProps<{ title: string, visible: boolean}>();
 
-const getCharacters = async(): Promise<Character[]> => {
+const getCharactersCacheFirst = async(): Promise<Character[]> => {
+
+        if ( characterStore.characters.count > 0 ) {
+            return characterStore.characters.list;
+        }
+
         const { data } = await breakingBadApi.get<Character[]>('/characters');
-        return data.filter( character => ![14, 17, 39].includes(character.char_id) )
+        return data;
 }
 
 
-const { isLoading, data } = useQuery(
+useQuery(
     ['characters'],
-    getCharacters,
+    getCharactersCacheFirst,
     {
         onSuccess( data ) {
             characterStore.loadedCharacters(data);

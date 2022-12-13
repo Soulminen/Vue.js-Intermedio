@@ -1,3 +1,4 @@
+import breakingBadApi from '@/api/breakingBadApi';
 import type { Character } from '@/characters/interfaces/character';
 import { reactive } from "vue";
 
@@ -29,16 +30,20 @@ const characterStore = reactive<Store>({
     },
 
     // Métodos
-    startLoadingCharacters() {
-        // console.log('Start Loading Characters');
+    async startLoadingCharacters() {
+        const { data } = await breakingBadApi.get<Character[]>('/characters');
+        this.loadedCharacters( data );
     },
     loadedCharacters( data: Character[] ) {
+
+        const characters = data.filter( character => ![14, 17, 39].includes(character.char_id) );
+
         this.characters = {
-            count: data.length,
+            count: characters.length,
             errorMessage: null,
             hasError: false,
             isLoading: false,
-            list: data,
+            list: characters,
         }
     },
     loadedCharactersFailed( error: string ) {
