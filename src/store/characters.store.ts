@@ -1,6 +1,6 @@
+import { reactive } from "vue";
 import breakingBadApi from '@/api/breakingBadApi';
 import type { Character } from '@/characters/interfaces/character';
-import { reactive } from "vue";
 
 
 interface Store {
@@ -11,11 +11,25 @@ interface Store {
         hasError: boolean;
         errorMessage: string | null;     
     },
+    ids: {
+        list: {
+            [id: string]: Character;
+        };
+        isLoading: boolean;
+        hasError: boolean;
+        errorMessage: string | null;  
+    },
 
-    // Metodos
+    // Métodos de Characters
     startLoadingCharacters: () => void;
     loadedCharacters: ( data: Character[] ) => void;
     loadedCharactersFailed: ( error: string ) => void;
+
+
+    // Metodos de Characters por IDs
+    startLoadingCharacter: () => void;
+    checkIdInStore: (id: string) => boolean;
+    loadedCharacter: (character: Character) => void
 }
 
 
@@ -27,6 +41,13 @@ const characterStore = reactive<Store>({
         hasError: false,
         isLoading: true,
         list: []
+    },
+
+    ids: {
+        list: {},
+        isLoading: false,
+        hasError: false,
+        errorMessage: null
     },
 
     // Métodos
