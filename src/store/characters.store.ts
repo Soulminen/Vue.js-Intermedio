@@ -31,7 +31,7 @@ const characterStore = reactive<Store>({
 
     // Métodos
     async startLoadingCharacters() {
-        const { data } = await breakingBadApi.get<Character[]>('/characters');
+        const { data } = await breakingBadApi.get<Character[]>('/character');
         this.loadedCharacters( data );
     },
     loadedCharacters( data: Character[] | string ) {
@@ -40,7 +40,7 @@ const characterStore = reactive<Store>({
             return this.loadedCharactersFailed('La respuesta no es un arreglo de personajes')
         }
 
-        const characters = data.filter( character => ![14, 17, 39].includes(character.char_id) );
+        const characters = data.filter( character => [14, 17, 39].includes(character.char_id) );
 
         this.characters = {
             count: characters.length,
