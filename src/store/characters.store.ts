@@ -29,7 +29,7 @@ interface Store {
     // Metodos de Characters por IDs
     startLoadingCharacter: () => void;
     checkIdInStore: (id: string) => boolean;
-    loadedCharacter: (character: Character) => void
+    loadedCharacter: (character: Character) => void;
 }
 
 
@@ -80,14 +80,26 @@ const characterStore = reactive<Store>({
             list: []
         }
 
-    }
+    },
 
+    // Metodos de Characters por IDs
+    startLoadingCharacter(){
+        this.ids = {
+            ...this.ids,
+            isLoading: true,
+            hasError: false,
+            errorMessage: null,
+        }
+    },
+    checkIdInStore(id: string) {
+        return !!this.ids.list[id];
+    },
+    loadedCharacter(character: Character) {
+        this.ids.isLoading = false;
+        this.ids.list[character.char_id] = character;
+    }
 });
 
 characterStore.startLoadingCharacters();
-
-
-
-
 
 export default characterStore;
