@@ -14,11 +14,7 @@ const {
 } = useCharacters();
 
 
-
-
-
 </script>
-
 
 <template>
 
@@ -40,7 +36,3 @@ const {
 
 </template>
 
-
-<style scoped>
-
-</style>
