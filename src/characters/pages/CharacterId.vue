@@ -1,4 +1,3 @@
-
 <script setup lang="ts">
 import { useRoute } from 'vue-router';
 import { useQuery } from '@tanstack/vue-query';
