@@ -12,27 +12,6 @@ const route = useRoute();
 const { id } = route.params as { id: string };
 
 
-const getCharacterCacheFirst = async( characterId: string ):Promise<Character> => {
-
-    if ( characterStore.checkIdInStore(characterId) ) {
-        return characterStore.ids.list[characterId];
-    }
-
-    const { data } = await breakingBadApi.get<Character[]>(`/characters/${ characterId }`);
-    return data[0];
-}
-
-const { data: character } = useQuery(
-    [ 'characters', id],
-    () => getCharacterCacheFirst(id),
-    {
-        onSuccess( character ) {
-            characterStore.loadedCharacter(character);
-        }
-    }
-)
-
-
 </script>
 
 <template>
