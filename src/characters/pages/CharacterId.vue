@@ -1,21 +1,19 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router';
-import { useQuery } from '@tanstack/vue-query';
-
-import breakingBadApi from '@/api/breakingBadApi';
-import characterStore from '@/store/characters.store';
-import type { Character } from '@/characters/interfaces/character';
+import useCharacter from '../composables/useCharacter';
 
 
 const route = useRoute();
 
 const { id } = route.params as { id: string };
 
+const { character, hasError, errorMessage } = useCharacter( id );
 
 </script>
 
 <template>
     <h1 v-if="!character">Loading...</h1>
+    <h1 v-else-if="hasError">{{ errorMessage }}</h1>
 
     <div v-else>
         <h1>{{ character.name }}</h1>
@@ -29,8 +27,6 @@ const { id } = route.params as { id: string };
                 <li>Actor: {{ character.portrayed }}</li>
                 <li>Estado: {{ character.status }}</li>
                 <li>Temporadas: {{ character.appearance.join(', ') }}</li>
-            
-            
             </ul>
         
         </div>
